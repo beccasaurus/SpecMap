@@ -32,7 +32,6 @@ class DogSpec extends SpecMap {
 
       "it should bark": (){
         var dog = new Dog(name: "Rover");
-
         Expect.equals("Woof!  My name is Rover!", dog.bark());
       },
 
