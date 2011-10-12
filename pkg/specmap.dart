@@ -132,9 +132,9 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
     example.evaluate();
     examplesByResult[example.result].add(example);
     if (example.failed)
-      printRed("${indent()}[F] ${example.name}");
+      printRed("${indent()}${example.name}");
     else if (example.error)
-      printRed("${indent()}[E] ${example.name}");
+      printRed("${indent()}${example.name}");
     else if (example.pending)
       printYellow("${indent()}[PENDING] ${example.name}");
     else
