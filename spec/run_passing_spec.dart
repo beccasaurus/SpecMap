@@ -1,4 +1,4 @@
-#import("../lib/specmap.dart");
+#import("../src/specmap.dart");
 
 #source("passing_example_spec.dart");
 
