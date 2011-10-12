@@ -16,7 +16,7 @@ class SpecMap {
   static var formatter;
 
   // Runs the given SpecMap instance (or Array of SpecMap instances)
-  static run(var specs) {
+  static int run(var specs) {
     if (formatter == null)
       formatter = new SpecMap_SpecDocFormatter();
 
@@ -27,19 +27,27 @@ class SpecMap {
     specs.forEach((spec) => spec._runSpec());
     formatter.footer();
   
+    // Hack to get a non-0 exit code
+    if (_anyExamplesFailed(specs))
+      throw new Exception("SPECS FAILED!");
+
+    // This is the ideal implementation, but returning a 
+    // non-zero exit code from a Dart's main() function 
+    // doesn't seem to be supported yet.
     return _anyExamplesFailed(specs) ? 1 : 0;
   }
 
   static bool _anyExamplesFailed(List<SpecMap> specs) {
+    var anyFailed = false;
     specs.forEach((spec) {
       spec.describes.forEach((describe) {
         describe.examples.forEach((example) {
           if (example.failed || example.error)
-            return true;
+            anyFailed = true;
         });
       });
     });
-    return false;
+    return anyFailed;
   }
 
   List<SpecMapDescribe> _describes;

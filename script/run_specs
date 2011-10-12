@@ -1,0 +1,9 @@
+#! /bin/bash
+
+echo "-> Running Passing Spec (should be only passing and pending)"
+dart_bin spec/run_passing_spec.dart
+echo "-> Exit code ($?) should be 0"
+
+echo "-> Running Failing Spec (should have all kinds of specs)"
+dart_bin spec/run_failing_spec.dart
+echo "-> Exit code ($?) should not be 0"
