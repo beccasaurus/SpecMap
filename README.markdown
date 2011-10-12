@@ -1,7 +1,7 @@
 SpecMap
 =======
 
-SpecMap is a micro testing library for Dart.
+SpecMap is a micro testing library for Dart (100 LOC)
 
 SpecMap is *intentionally* very limited and I don't intend on adding many, 
 if any, features to it.
