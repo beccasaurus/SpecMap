@@ -14,6 +14,8 @@ I wanted [Spec.dart][] to have a very extensive, yet easy to read, test suite.
 I looked at the testing patterns used in the Dart source code and I didn't think 
 they would result in a test suite that I would like, so I wrote SpecMap.
 
+![SpecMap Example Screenshot](https://github.com/remi/SpecMap/raw/master/pkg/screenshot.png)
+
 Installing
 ----------
 
