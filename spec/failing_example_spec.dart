@@ -16,5 +16,10 @@ class FailingExampleSpec extends SpecMap {
       }
 
     });
+
+    describe("Some passing stuff is here too", {
+      "green!": () {},
+      "yellow!": null
+    });
   }
 }

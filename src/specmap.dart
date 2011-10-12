@@ -1,95 +1,81 @@
 #library("specmap");
 
+#source("specmap/describe.dart");
+#source("specmap/example.dart");
+#source("specmap/formatter.dart");
+#source("specmap/specdoc_formatter.dart");
+#source("specmap/dots_formatter.dart");
+
+// Represents a "Spec"
 class SpecMap {
-  static final VERSION = '0.1.0';
-  static var _stats;
 
-  static run(specs) {
-    if (specs is SpecMap) specs = [specs];
+  // Returns the vurrent version of SpecMap
+  static final VERSION = "0.2.0";
 
-    _printHeader();
+  // Gets/sets the current SpecMapFormatter
+  static var formatter;
 
-    _stats = { "passed": 0, "pending": [], "failed": [], "error": [] };
+  // Runs the given SpecMap instance (or Array of SpecMap instances)
+  static run(var specs) {
+    if (formatter == null)
+      formatter = new SpecMap_SpecDocFormatter();
+
+    if (specs is SpecMap)
+      specs = [specs];
+
+    formatter.header();
+    specs.forEach((spec) => spec._runSpec());
+    formatter.footer();
+  
+    return _anyExamplesFailed(specs) ? 1 : 0;
+  }
+
+  static bool _anyExamplesFailed(List<SpecMap> specs) {
     specs.forEach((spec) {
-      spec._run();
-    });
-
-    _printSummary();
-
-    return _anyExamplesFailed ? 1 : 0;
-  }
-
-  static get _passed()            => _stats['passed'];
-  static get _pending()           => _stats['pending'];
-  static get _failed()            => _stats['failed'];
-  static get _error()             => _stats['error'];
-  static get _anyExamplesFailed() => _failed.length > 0 || _error.length > 0;
-
-  static _printHeader() => print("~ SpecMap $VERSION ~\n");
-
-  static _printSummary() {
-    print('--- SUMMARY ---');
-    _printPendings();
-    _printExceptions('Failed', _failed);
-    _printExceptions('Error',  _error);
-    print('\n$_passed PASSED, ${_failed.length} FAILED, ${_error.length} ERROR');
-  }
-
-  static _printPendings() {
-    if (_pending.length > 0) {
-      print('\n${_pending.length} Pending\n');
-      _pending.forEach((pending) {
-        print(' * $pending');
+      spec.describes.forEach((describe) {
+        describe.examples.forEach((example) {
+          if (example.failed || example.error)
+            return true;
+        });
       });
-    }
-  }
-
-  static _printExceptions(var heading, var exceptions) {
-    if (exceptions.length > 0) {
-      print('\n${exceptions.length} $heading');
-      exceptions.forEach((exception) {
-        print('\n${exception.message}');
-      });
-      print('\n');
-    }
-  }
-
-  var _describes;
-
-  spec(){}
-
-  describe(String subject, var mapOfSpecs) {
-    if (_describes == null)          _describes = {};
-    if (_describes[subject] == null) _describes[subject] = {};
-
-    mapOfSpecs.forEach((exampleName, block) {
-      _describes[subject][exampleName] = block;
     });
+    return false;
   }
 
-  _run() {
+  List<SpecMapDescribe> _describes;
+
+  // All of this spec's describes (as defined in spec())
+  List<SpecMapDescribe> get describes() {
+    if (_describes == null) initializeSpec();
+    return _describes;
+  }
+
+  // Initializes this spec's describes by calling 
+  // all of the aliases that you're allowed to use 
+  // when defining your describes.
+  initializeSpec() {
     spec();
-    
-    _describes.forEach((subject, examples) {
-      print(subject);
-      examples.forEach((exampleName, block) {
-        // TODO allow custom output
-        if (block != null) {
-          print('  ' + exampleName);
-          try {
-            block();
-            ++_stats["passed"];
-          } catch (ExpectException ex) {
-            _stats["failed"].add(ex);
-          } catch (Exception ex) {
-            _stats["error"].add(ex);
-          }
-        } else {
-          print("  [PENDING] $exampleName");
-          _stats["pending"].add(exampleName);
-        }
+    specs();
+  }
+
+  // Can be overriden to initialize describes/examples
+  spec(){}
+  specs(){}
+
+  // Called to add a set of examples to your SpecMap.
+  describe(String subject, var mapOfExamples) {
+    if (_describes == null) _describes = [];
+    _describes.add(new SpecMapDescribe(subject, mapOfExamples));
+  }
+
+  // Runs this SpecMap instance's specs.
+  // Called for each spec when SpecMap.run() is called.
+  _runSpec() {
+    describes.forEach((describe) {
+      formatter.describe(describe);
+      describe.examples.forEach((example) {
+        formatter.example(example);
       });
-      print("");
-    });    
+    });
   }
 }
