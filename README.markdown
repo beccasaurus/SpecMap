@@ -1,5 +1,5 @@
-SpecMap.dart
-============
+SpecMap
+=======
 
 SpecMap is a micro testing library for Dart.
 
@@ -17,13 +17,12 @@ they would result in a test suite that I would like, so I wrote SpecMap.
 Installing
 ----------
 
-    // Not yet ... I'll update this momentarily ...
-    wget https://github.com/remi/SpecMap/.../specmap.dart
+    wget https://raw.github.com/remi/SpecMap/master/lib/specmap.dart
 
 Usage
 -----
 
-```java
+```actionscript
 #import(specmap.dart);
 #import(dog.dart);
 
@@ -54,7 +53,7 @@ Okay so ... wait, what?
 
 Here's the annotated version:
 
-```java
+```actionscript
 #import(specmap.dart);
 #import(library_containing_dog.dart);
 
