@@ -132,13 +132,13 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
     example.evaluate();
     examplesByResult[example.result].add(example);
     if (example.failed)
-      printRed("[F] ${example.name}");
+      printRed("${indent()}[F] ${example.name}");
     else if (example.error)
-      printRed("[E] ${example.name}");
+      printRed("${indent()}[E] ${example.name}");
     else if (example.pending)
-      printYellow("[PENDING] ${example.name}");
+      printYellow("${indent()}[PENDING] ${example.name}");
     else
-      printGreen(example.name);
+      printGreen(indent() + example.name);
   }
   footer() {
     print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -183,7 +183,7 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
     if (examplesByResult["pending"].length > 0) {
       print("\nPending:");
       examplesByResult["pending"].forEach((example) {
-        printYellow("\n${indent()}${example.describe.subject} ${example.name}");
+        printYellow("${indent()}${example.describe.subject} ${example.name}");
       });
     }
   }
@@ -192,9 +192,9 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
   printYellow(String text) => printWithColor(text, 33);
   printWithColor(String text, int colorCode) {
     if (useColor)
-      print("  \x1b\x5b;0;${colorCode}m ${text}${whiteColorEscapeSequence}");
+      print("\x1b\x5b;0;${colorCode}m${text}${whiteColorEscapeSequence}");
     else
-      print("  $text");
+      print(text);
   }
   indent([int numberOfTimes = 1, String textToIndentWith = "  "]) {
     var str = "";

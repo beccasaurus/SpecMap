@@ -2,15 +2,13 @@
 
 library=specmap
 version="$(cat src/${library}.dart | grep 'VERSION = ' | sed 's/.*VERSION = "\(.*\)".*/\1/g')"
-package="pkg/$library-$version.dart"
-latest="pkg/$library.dart"
+package="pkg/$library.dart"
 
 echo "Packaging $version of $library"
+mkdir -pv pkg
 rm -fv "$package"
-rm -fv "$latest"
 for file in `find src -iname '*.dart'`; do
   # cat the file without comments or empty lines or #sources into the package
   cat "$file" | grep -v -e '^[ ]*\/\/' | grep -v -e '^[ ]*$' | grep -v '#source(' >> "$package"
 done
-cp "$package" "pkg/$library.dart"
-echo "Done.  Created $package (and $latest)"
+echo "Done.  Created $package"
