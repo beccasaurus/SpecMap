@@ -17,7 +17,7 @@ they would result in a test suite that I would like, so I wrote SpecMap.
 Installing
 ----------
 
-    wget https://raw.github.com/remi/SpecMap/master/lib/specmap.dart
+    wget https://raw.github.com/remi/SpecMap/master/src/specmap.dart
 
 Usage
 -----
