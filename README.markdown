@@ -107,6 +107,21 @@ main() => SpecMap.run(new DogSpec());
 
 That's really all there is to it!
 
+Contributing
+------------
+
+To run the "specs":
+
+    # This should result in happy output 
+    # and the exit code should be 0
+    dart_bin spec/run_passing_spec.dart
+
+    # This should result in sad panda output 
+    # and the exit code should be 1
+    dart_bin spec/run_failing_spec.dart
+
+That's it - just eyeball it.  SpecMap doesn't have any of its own tests!
+
 License
 -------
 
