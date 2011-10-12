@@ -16,14 +16,7 @@ class SpecMap {
 
     _printSummary();
 
-    if (_anyExamplesFailed)
-      return 1;
-    else
-      return 0;
-  }
-
-  static _printHeader() {
-    print("~ SpecMap $VERSION ~\n");
+    return _anyExamplesFailed ? 1 : 0;
   }
 
   static get _passed()            => _stats['passed'];
@@ -32,8 +25,10 @@ class SpecMap {
   static get _error()             => _stats['error'];
   static get _anyExamplesFailed() => _failed.length > 0 || _error.length > 0;
 
+  static _printHeader() => print("~ SpecMap $VERSION ~\n");
+
   static _printSummary() {
-    print('\n--- SUMMARY ---');
+    print('--- SUMMARY ---');
     _printPendings();
     _printExceptions('Failed', _failed);
     _printExceptions('Error',  _error);
@@ -59,36 +54,42 @@ class SpecMap {
     }
   }
 
-  var _specs;
+  var _describes;
 
   spec(){}
 
-  map(var mapOfSpecs) {
-    if (_specs == null)
-      _specs = {};
+  describe(String subject, var mapOfSpecs) {
+    if (_describes == null)          _describes = {};
+    if (_describes[subject] == null) _describes[subject] = {};
 
     mapOfSpecs.forEach((exampleName, block) {
-      _specs[exampleName] = block;
+      _describes[subject][exampleName] = block;
     });
   }
 
   _run() {
     spec();
-    _specs.forEach((exampleName, block) {
-      if (block != null) {
-        print(exampleName);
-        try {
-          block();
-          ++_stats["passed"];
-        } catch (ExpectException ex) {
-          _stats["failed"].add(ex);
-        } catch (Exception ex) {
-          _stats["error"].add(ex);
+    
+    _describes.forEach((subject, examples) {
+      print(subject);
+      examples.forEach((exampleName, block) {
+        // TODO allow custom output
+        if (block != null) {
+          print('  ' + exampleName);
+          try {
+            block();
+            ++_stats["passed"];
+          } catch (ExpectException ex) {
+            _stats["failed"].add(ex);
+          } catch (Exception ex) {
+            _stats["error"].add(ex);
+          }
+        } else {
+          print("  [PENDING] $exampleName");
+          _stats["pending"].add(exampleName);
         }
-      } else {
-        print("[PENDING] $exampleName");
-        _stats["pending"].add(exampleName);
-      }
-    });
+      });
+      print("");
+    });    
   }
 }

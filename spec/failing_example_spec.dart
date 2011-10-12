@@ -1,6 +1,6 @@
-class ExampleSpec extends SpecMap {
+class FailingExampleSpec extends SpecMap {
   spec() {
-    map({
+    describe("Failing Example", {
 
       'This should blow up': () {
         var foo = 5;

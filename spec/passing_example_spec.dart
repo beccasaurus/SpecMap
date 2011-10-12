@@ -1,6 +1,6 @@
 class PassingExampleSpec extends SpecMap {
   spec() {
-    map({
+    describe("Passing Examples", {
 
       'This should print Hello': (){
         print('  -> Hello');

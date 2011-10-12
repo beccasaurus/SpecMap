@@ -2,4 +2,4 @@
 
 #source("failing_example_spec.dart");
 
-int main() => SpecMap.run(new ExampleSpec());
+int main() => SpecMap.run(new FailingExampleSpec());

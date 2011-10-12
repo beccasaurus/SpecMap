@@ -28,7 +28,7 @@ Usage
 
 class DogSpec extends SpecMap {
   spec() {
-    map({
+    describe("Dog", {
 
       "it should bark": (){
         var dog = new Dog(name: "Rover");
@@ -41,6 +41,10 @@ class DogSpec extends SpecMap {
         5.methodThatDoesntExist();
       }
 
+    });
+
+    describe("More dog stuff", {
+      "it should do more stuff": null
     });
   }
 }
@@ -64,11 +68,12 @@ class DogSpec extends SpecMap {
   spec() {
 
     // In your definition of the SpecMap.spec method, make a 
-    // call to SpecMap.map, which accepts a Map<String,Function> 
+    // call to SpecMap.describe, which accepts a String describing 
+    // what you're speccing and a Map<String,Function> 
     // where the String is a description of your example and 
     // the Function is an anonymous function containing the 
     // code for the test.
-    map({
+    describe({
 
       // "description": () { anonymous function }
       "it should bark": (){
@@ -92,6 +97,11 @@ class DogSpec extends SpecMap {
         5.methodThatDoesntExist();
       }
 
+    });
+
+    // You can call describe multiple times
+    describe("More dog stuff", {
+      "it should do more stuff": null
     });
   }
 }
