@@ -10,10 +10,15 @@
 class SpecMap {
 
   // Returns the vurrent version of SpecMap
-  static final VERSION = "0.2.0";
+  static final VERSION = "0.2.1";
 
   // Gets/sets the current SpecMapFormatter
   static var formatter;
+
+  // If set to true, we don't catch any runtime exceptions 
+  // (that aren't ExpectException), so you can see the 
+  // exception's full stacktrace.
+  static bool raiseExceptions;
 
   // Runs the given SpecMap instance (or Array of SpecMap instances)
   static int run(var specs) {

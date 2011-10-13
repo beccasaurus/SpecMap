@@ -1,7 +1,8 @@
 #library("specmap");
 class SpecMap {
-  static final VERSION = "0.2.0";
+  static final VERSION = "0.2.1";
   static var formatter;
+  static bool raiseExceptions;
   static int run(var specs) {
     if (formatter == null)
       formatter = new SpecMap_SpecDocFormatter();
@@ -90,6 +91,8 @@ class SpecMapExample {
       } catch (Exception ex) {
         result    = "error";
         exception = ex;
+        if (SpecMap.raiseExceptions)
+          throw exception;
       }
     } else {
       result = "pending";

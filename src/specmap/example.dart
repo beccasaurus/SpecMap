@@ -49,6 +49,8 @@ class SpecMapExample {
       } catch (Exception ex) {
         result    = "error";
         exception = ex;
+        if (SpecMap.raiseExceptions)
+          throw exception;
       }
     } else {
       result = "pending";
