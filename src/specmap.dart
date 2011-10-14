@@ -10,7 +10,7 @@
 class SpecMap {
 
   // Returns the vurrent version of SpecMap
-  static final VERSION = "0.2.1";
+  static final VERSION = "0.2.2";
 
   // Gets/sets the current SpecMapFormatter
   static var formatter;

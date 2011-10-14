@@ -1,6 +1,6 @@
 #library("specmap");
 class SpecMap {
-  static final VERSION = "0.2.1";
+  static final VERSION = "0.2.2";
   static var formatter;
   static bool raiseExceptions;
   static int run(var specs) {
@@ -74,7 +74,7 @@ class SpecMapExample {
   get pending()   => result == "pending";
   get evaluated() => _evaluated;
   evaluate() {
-    if (! _evaluated) {
+    if (_evaluated != true) {
       _evaluated = true;
       _runBlockAndSetResult();
     }
@@ -91,12 +91,12 @@ class SpecMapExample {
       } catch (Exception ex) {
         result    = "error";
         exception = ex;
-        if (SpecMap.raiseExceptions)
-          throw exception;
       }
     } else {
       result = "pending";
     }
+    if (SpecMap.raiseExceptions == true && exception != null)
+      throw exception;
   }
 }
 class SpecMap_DotsFormatter extends SpecMap_SpecDocFormatter {

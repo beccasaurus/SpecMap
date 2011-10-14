@@ -31,7 +31,7 @@ class SpecMapExample {
   // setting result and exception (if caught) and returning 
   // true if passed/pending or false if failed/error.
   evaluate() {
-    if (! _evaluated) {
+    if (_evaluated != true) {
       _evaluated = true;
       _runBlockAndSetResult();
     }
@@ -49,11 +49,11 @@ class SpecMapExample {
       } catch (Exception ex) {
         result    = "error";
         exception = ex;
-        if (SpecMap.raiseExceptions)
-          throw exception;
       }
     } else {
       result = "pending";
     }
+    if (SpecMap.raiseExceptions == true && exception != null)
+      throw exception;
   }
 }

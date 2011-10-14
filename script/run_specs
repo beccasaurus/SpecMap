@@ -1,13 +1,13 @@
 #! /bin/bash
 
 echo "-> Running Passing Spec (should be only passing and pending)"
-dart_bin spec/run_passing_spec.dart
+dart_bin --enable_type_checks spec/run_passing_spec.dart
 echo "-> Exit code ($?) should be 0"
 
 echo "-> Running Failing Spec (should have all kinds of specs)"
-dart_bin spec/run_failing_spec.dart
+dart_bin --enable_type_checks spec/run_failing_spec.dart
 echo "-> Exit code ($?) should not be 0"
 
 echo "-> Running Failing Spec that Raises Exceptions (should blow up with a stacktrace)"
-dart_bin spec/run_failing_raising_exceptions_spec.dart
+dart_bin --enable_type_checks spec/run_failing_raising_exceptions_spec.dart
 echo "-> Exit code ($?) should not be 0"
