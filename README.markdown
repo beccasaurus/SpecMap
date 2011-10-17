@@ -8,9 +8,9 @@ if any, features to it.
 
 Actually, the reason why I made SpecMap was so I could use it as a testing 
 library to test-drive the creation of another testing libary for Dart, 
-[Spec.dart][]
+[DSpec][]
 
-I wanted [Spec.dart][] to have a very extensive, yet easy to read, test suite. 
+I wanted DSpec to have a very extensive, yet easy to read, test suite. 
 I looked at the testing patterns used in the Dart source code and I didn't think 
 they would result in a test suite that I would like, so I wrote SpecMap.
 
@@ -133,4 +133,4 @@ License
 
 SpecMap is released under the MIT license.
 
-[Spec.dart]: https://github.com/remi/spec.dart
+[DSpec]: https://github.com/remi/dspec
