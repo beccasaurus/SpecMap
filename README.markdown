@@ -6,14 +6,6 @@ SpecMap is a micro testing library for Dart.
 SpecMap is *intentionally* very limited and I don't intend on adding many, 
 if any, features to it.
 
-Actually, the reason why I made SpecMap was so I could use it as a testing 
-library to test-drive the creation of another testing libary for Dart, 
-[DSpec][]
-
-I wanted DSpec to have a very extensive, yet easy to read, test suite. 
-I looked at the testing patterns used in the Dart source code and I didn't think 
-they would result in a test suite that I would like, so I wrote SpecMap.
-
 ![SpecMap Example Screenshot](https://github.com/remi/SpecMap/raw/master/pkg/screenshot.png)
 
 Installing
@@ -132,5 +124,3 @@ License
 -------
 
 SpecMap is released under the MIT license.
-
-[DSpec]: https://github.com/remi/dspec
