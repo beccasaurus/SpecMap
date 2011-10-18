@@ -71,7 +71,8 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
       print("\nFailures:");
       examplesByResult["failed"].forEach((example) {
         printRed("\n${indent()}${example.describe.subject} ${example.name}");
-        print("${indent(2)}Exception: ${example.exception}");
+        print("${indent(2)}Exception:  ${example.exception}");
+        print("${indent(2)}StackTrace:\n${example.stackTrace}");
       });
     }
   }
@@ -81,7 +82,8 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
       print("\nErrors:");
       examplesByResult["error"].forEach((example) {
         printRed("\n${indent()}${example.describe.subject} ${example.name}");
-        print("${indent(2)}Exception: ${example.exception}");
+        print("${indent(2)}Exception:  ${example.exception}");
+        print("${indent(2)}StackTrace:\n${example.stackTrace}");
       });
     }
   }

@@ -19,6 +19,9 @@ class SpecMapExample {
   // Stores the Exception that was raised, if any, when this example was evaluated.
   Exception exception;
 
+  // Stores the StackTrace object that can be caught along with exceptions via catch()
+  var stackTrace;
+
   bool _evaluated;
 
   get passed()    => result == "passed";
@@ -43,12 +46,14 @@ class SpecMapExample {
       try {
         block();
         result = "passed";
-      } catch (ExpectException ex) {
-        result    = "failed";
-        exception = ex;
-      } catch (Exception ex) {
-        result    = "error";
-        exception = ex;
+      } catch (ExpectException ex, var trace) {
+        result     = "failed";
+        exception  = ex;
+        stackTrace = trace;
+      } catch (Exception ex, var trace) {
+        result     = "error";
+        exception  = ex;
+        stackTrace = trace;
       }
     } else {
       result = "pending";

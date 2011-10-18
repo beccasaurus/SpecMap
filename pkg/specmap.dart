@@ -1,6 +1,6 @@
 #library("specmap");
 class SpecMap {
-  static final VERSION = "0.2.2";
+  static final VERSION = "0.2.3";
   static var formatter;
   static bool raiseExceptions;
   static int run(var specs) {
@@ -67,6 +67,7 @@ class SpecMapExample {
   SpecMapExample(this.describe, this.name, this.block);
   String result;
   Exception exception;
+  var stackTrace;
   bool _evaluated;
   get passed()    => result == "passed";
   get failed()    => result == "failed";
@@ -85,12 +86,14 @@ class SpecMapExample {
       try {
         block();
         result = "passed";
-      } catch (ExpectException ex) {
-        result    = "failed";
-        exception = ex;
-      } catch (Exception ex) {
-        result    = "error";
-        exception = ex;
+      } catch (ExpectException ex, var trace) {
+        result     = "failed";
+        exception  = ex;
+        stackTrace = trace;
+      } catch (Exception ex, var trace) {
+        result     = "error";
+        exception  = ex;
+        stackTrace = trace;
       }
     } else {
       result = "pending";
@@ -169,7 +172,8 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
       print("\nFailures:");
       examplesByResult["failed"].forEach((example) {
         printRed("\n${indent()}${example.describe.subject} ${example.name}");
-        print("${indent(2)}Exception: ${example.exception}");
+        print("${indent(2)}Exception:  ${example.exception}");
+        print("${indent(2)}StackTrace:\n${example.stackTrace}");
       });
     }
   }
@@ -178,7 +182,8 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
       print("\nErrors:");
       examplesByResult["error"].forEach((example) {
         printRed("\n${indent()}${example.describe.subject} ${example.name}");
-        print("${indent(2)}Exception: ${example.exception}");
+        print("${indent(2)}Exception:  ${example.exception}");
+        print("${indent(2)}StackTrace:\n${example.stackTrace}");
       });
     }
   }
