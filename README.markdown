@@ -3,8 +3,7 @@ SpecMap
 
 SpecMap is a micro testing library for Dart.
 
-SpecMap is *intentionally* very limited and I don't intend on adding many, 
-if any, features to it.
+SpecMap is *intentionally* very limited and I don't intend on adding many, if any, features to it.
 
 ![SpecMap Example Screenshot](https://github.com/remi/SpecMap/raw/master/pkg/screenshot.png)
 
@@ -17,8 +16,8 @@ Usage
 -----
 
 ```actionscript
-#import(specmap.dart);
-#import(dog.dart);
+#import("specmap.dart");
+#import("dog.dart");
 
 class DogSpec extends SpecMap {
   spec() {
@@ -51,8 +50,8 @@ Okay so ... wait, what?
 Here's the annotated version:
 
 ```actionscript
-#import(specmap.dart);
-#import(library_containing_dog.dart);
+#import("specmap.dart");
+#import("dog.dart"); // <--- assuming that your Dog class comes from this library
 
 // Define your spec, extending SpecMap
 class DogSpec extends SpecMap {
@@ -67,7 +66,7 @@ class DogSpec extends SpecMap {
     // where the String is a description of your example and 
     // the Function is an anonymous function containing the 
     // code for the test.
-    describe({
+    describe("Dog", {
 
       // "description": () { anonymous function }
       "it should bark": (){
@@ -116,9 +115,9 @@ Contributing
 
 To run the "specs": `./script/run_specs`
 
-That's it - just eyeball the output.
+That's it - just eyeball the output and make sure it looks correct.
 
-SpecMap doesn't have any of its own unit tests!
+SpecMap doesn't have any of its own unit tests, hence why it's staying TINY on purpose!
 
 License
 -------
