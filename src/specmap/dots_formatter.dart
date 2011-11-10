@@ -7,6 +7,8 @@
 //
 // NOTE: print() currently always prints newlines, making this formatter icky.
 class SpecMap_DotsFormatter extends SpecMap_SpecDocFormatter {
+  SpecMap_DotsFormatter([useColor = null]) : super(useColor);
+
   describe(describe){}
 
   example(example) {
