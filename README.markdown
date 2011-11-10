@@ -1,6 +1,8 @@
 SpecMap
 =======
 
+**Website:** [http://remi.github.com/SpecMap](http://remi.github.com/SpecMap)
+
 SpecMap is a micro testing library for Dart.
 
 SpecMap is *intentionally* very limited and I don't intend on adding many, if any, features to it.
@@ -51,7 +53,7 @@ Here's the annotated version:
 
 ```actionscript
 #import("specmap.dart");
-#import("dog.dart"); // <--- assuming that your Dog class comes from this library
+#import("dog.dart"); // <--- assuming your Dog class comes from this library
 
 // Define your spec, extending SpecMap
 class DogSpec extends SpecMap {
