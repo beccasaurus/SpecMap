@@ -6,21 +6,22 @@
 #source("specmap/specdoc_formatter.dart");
 #source("specmap/dots_formatter.dart");
 
-// Represents a "Spec"
+/** Represents a "Spec." */
 class SpecMap {
 
-  // Returns the vurrent version of SpecMap
+  /** Returns the vurrent version of SpecMap. */
   static final VERSION = "0.2.3";
 
-  // Gets/sets the current SpecMapFormatter
+  /** Gets/sets the current SpecMapFormatter. */
   static var formatter;
 
-  // If set to true, we don't catch any runtime exceptions 
-  // (that aren't ExpectException), so you can see the 
-  // exception's full stacktrace.
+  /** 
+   * If set to true, we don't catch any runtime exceptions 
+   * (that aren't ExpectException), so you can see the 
+   * exception's full stacktrace. */
   static bool raiseExceptions;
 
-  // Runs the given SpecMap instance (or Array of SpecMap instances)
+  /** Runs the given SpecMap instance (or Array of SpecMap instances). */
   static int run(var specs) {
     if (formatter == null)
       formatter = new SpecMap_SpecDocFormatter();
@@ -57,25 +58,28 @@ class SpecMap {
 
   List<SpecMapDescribe> _describes;
 
-  // All of this spec's describes (as defined in spec())
+  /** All of this spec's describes (as defined in spec()). */
   List<SpecMapDescribe> get describes() {
     if (_describes == null) initializeSpec();
     return _describes;
   }
 
-  // Initializes this spec's describes by calling 
-  // all of the aliases that you're allowed to use 
-  // when defining your describes.
+  /**
+   *  Initializes this spec's describes by calling 
+   * all of the aliases that you're allowed to use 
+   * when defining your describes. */
   initializeSpec() {
     spec();
     specs();
   }
 
-  // Can be overriden to initialize describes/examples
+  /** Can be overriden to initialize describes/examples. */
   spec(){}
+
+  /** Can be overriden to initialize describes/examples. */
   specs(){}
 
-  // Called to add a set of examples to your SpecMap.
+  /** Called to add a set of examples to your SpecMap. */
   describe(String subject, var mapOfExamples) {
     if (_describes == null) _describes = [];
     _describes.add(new SpecMapDescribe(subject, mapOfExamples));

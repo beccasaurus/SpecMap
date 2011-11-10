@@ -10,7 +10,7 @@ SpecMap is *intentionally* very limited and I don't intend on adding many, if an
 Installing
 ----------
 
-    wget https://raw.github.com/remi/SpecMap/master/pkg/specmap.dart
+Download the [latest version of SpecMap.dart](https://raw.github.com/remi/SpecMap/master/pkg/specmap.dart)
 
 Usage
 -----

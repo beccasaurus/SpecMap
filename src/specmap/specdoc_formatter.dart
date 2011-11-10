@@ -1,10 +1,12 @@
-// Custom SpecMapFormatter that outputs the names of all 
-// describes with indented examples under each.
-//
-// Once everything has finished running, a summary of 
-// the total passed/failed/etc examples is printed.
-//
-// NOTE: This is the default SpecMap formatter.
+/** 
+ * Custom SpecMapFormatter that outputs the names of all 
+ * describes with indented examples under each.
+ *
+ * Once everything has finished running, a summary of 
+ * the total passed/failed/etc examples is printed.
+ *
+ * NOTE: This is the default SpecMap formatter.
+ */
 class SpecMap_SpecDocFormatter extends SpecMapFormatter {
   final String whiteColorEscapeSequence = "\x1b\x5b;0;37m";
 

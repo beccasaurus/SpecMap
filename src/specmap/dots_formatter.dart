@@ -1,11 +1,13 @@
-// Custom SpecMapFormatter that outputs a dot for every 
-// passing spec, an F for every failure, an E for every error, 
-// and a P for every pending example.
-// 
-// Other than this output per spec, this formatter is identical 
-// to the default SpecMap_SpecDocFormatter (including color support);
-//
-// NOTE: print() currently always prints newlines, making this formatter icky.
+/** 
+ * Custom SpecMapFormatter that outputs a dot for every 
+ * passing spec, an F for every failure, an E for every error, 
+ * and a P for every pending example.
+ * 
+ * Other than this output per spec, this formatter is identical 
+ * to the default SpecMap_SpecDocFormatter (including color support);
+ *
+ * NOTE: print() currently always prints newlines, making this formatter icky.
+ */
 class SpecMap_DotsFormatter extends SpecMap_SpecDocFormatter {
   SpecMap_DotsFormatter([useColor = null]) : super(useColor);
 

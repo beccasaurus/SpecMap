@@ -1,25 +1,25 @@
-// Represents a single example, inside of describe block of a spec.
+/** Represents a single example, inside of describe block of a spec. */
 class SpecMapExample {
   
-  // This example's describe
+  /** This example's describe. */
   SpecMapDescribe describe;
 
-  // The name/text given for this example
+  /** The name/text given for this example. */
   String name;
 
-  // The actual Function representing the code for this example
+  /** The actual Function representing the code for this example. */
   Function block;
 
-  // Initialized an example given its SpecMapDescribe, name, and block
+  /** Initialized an example given its SpecMapDescribe, name, and block. */
   SpecMapExample(this.describe, this.name, this.block);
 
-  // The resulting state of this Example once evaluated, eg. "passed" or "failed"
+  /** The resulting state of this Example once evaluated, eg. "passed" or "failed." */
   String result;
 
-  // Stores the Exception that was raised, if any, when this example was evaluated.
+  /** Stores the Exception that was raised, if any, when this example was evaluated. */
   Exception exception;
 
-  // Stores the StackTrace object that can be caught along with exceptions via catch()
+  /** Stores the StackTrace object that can be caught along with exceptions via catch(). */
   var stackTrace;
 
   bool _evaluated;
@@ -30,9 +30,10 @@ class SpecMapExample {
   get pending()   => result == "pending";
   get evaluated() => _evaluated;
 
-  // Evaluates this example (if it hasn't already been evaluated) 
-  // setting result and exception (if caught) and returning 
-  // true if passed/pending or false if failed/error.
+  /** 
+   * Evaluates this example (if it hasn't already been evaluated) 
+   * setting result and exception (if caught) and returning 
+   * true if passed/pending or false if failed/error. */
   evaluate() {
     if (_evaluated != true) {
       _evaluated = true;
