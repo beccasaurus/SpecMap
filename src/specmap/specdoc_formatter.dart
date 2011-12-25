@@ -16,7 +16,7 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
 
   SpecMap_SpecDocFormatter([useColor = true]) {
     this.useColor         = useColor;
-    this.examplesByResult = <String, List<SpecMapExample>>{
+    this.examplesByResult = <List<SpecMapExample>>{
       "passed": [], "pending": [], "failed": [], "error": []
     };
   }
@@ -30,17 +30,21 @@ class SpecMap_SpecDocFormatter extends SpecMapFormatter {
     print("\n" + describe.subject);
   }
 
-  example(example) {
-    example.evaluate();
-    examplesByResult[example.result].add(example);
-    if (example.failed)
-      printRed("${indent()}${example.name}");
-    else if (example.error)
-      printRed("${indent()}${example.name}");
-    else if (example.pending)
-      printYellow("${indent()}[PENDING] ${example.name}");
-    else
-      printGreen(indent() + example.name);
+  example(ex) {
+    ex.evaluate((example){
+      if (example.isAsync) --SpecMap._numberOfAsyncTestsStillRunning;
+      print("number of ASYNC left: ${SpecMap._numberOfAsyncTestsStillRunning}");
+      print("example evaluated.  ${ex.name}.  RESULT: ${ex.result}");
+      examplesByResult[example.result].add(example);
+      if (example.failed)
+        printRed("${indent()}${example.name}");
+      else if (example.error)
+        printRed("${indent()}${example.name}");
+      else if (example.pending)
+        printYellow("${indent()}[PENDING] ${example.name}");
+      else
+        printGreen(indent() + example.name);
+    });
   }
 
   footer() {

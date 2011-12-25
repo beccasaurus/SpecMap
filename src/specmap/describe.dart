@@ -12,7 +12,11 @@ class SpecMapDescribe {
    * Map<String,Function> representing this describe's examples. */
   SpecMapDescribe(this.subject, var mapOfExamples) {
     examples = new List<SpecMapExample>();
-    mapOfExamples.forEach((exampleName, block) => 
-      examples.add(new SpecMapExample(this, exampleName, block)));
+    mapOfExamples.forEach((exampleName, value) {
+      if (value is SpecMapAsyncFunction)
+        examples.add(new SpecMapExample(this, exampleName, value.block, true));
+      else
+        examples.add(new SpecMapExample(this, exampleName, value, false));
+    });
   }
 }
